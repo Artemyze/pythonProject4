@@ -1,5 +1,5 @@
-from dot import *
-from exception import *
+from game import *
+
 
 class Board:
     def __init__(self, hid=False, size=6):
@@ -7,6 +7,8 @@ class Board:
         self.hid = hid
 
         self.count = 0
+        self.killed = True
+        self.touched = False
 
         self.field = [["O"] * size for _ in range(size)]
 
@@ -39,16 +41,6 @@ class Board:
                         self.field[cur.x][cur.y] = "."
                     self.busy.append(cur)
 
-    def __str__(self):
-        res = ""
-        res += "  | 1 | 2 | 3 | 4 | 5 | 6 |"
-        for i, row in enumerate(self.field):
-            res += f"\n{i + 1} | " + " | ".join(row) + " |"
-
-        if self.hid:
-            res = res.replace("■", "O")
-        return res
-
     def out(self, d):
         return not ((0 <= d.x < self.size) and (0 <= d.y < self.size))
 
@@ -69,10 +61,15 @@ class Board:
                     self.count += 1
                     self.contour(ship, verb=True)
                     print("Корабль уничтожен!")
+                    self.killed = True
                     return False
                 else:
                     print("Корабль ранен!")
+                    self.killed = False
+                    self.touched = True
                     return True
+            else:
+                self.touched = False
 
         self.field[d.x][d.y] = "."
         print("Мимо!")

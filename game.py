@@ -52,8 +52,8 @@ class Game:
     def loop(self):
         num = 0
         while True:
-            g = PrintBoard(self.ai.board, self.us.board)
-            print(g)
+            text_field = PrinterBoard(self.ai.board, self.us.board)
+            print(text_field)
             if num % 2 == 0:
                 print("-" * 20)
                 print("Ходит пользователь!")

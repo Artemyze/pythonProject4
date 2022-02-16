@@ -1,4 +1,4 @@
-class PrintBoard:
+class PrinterBoard:
     def __init__(self, board_p1, board_p2):
         self.board_p1 = board_p1
         self.board_p2 = board_p2
