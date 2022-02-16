@@ -1,8 +1,9 @@
-from ship import *
-from players import *
-from random import randint
 from board import *
 from print_boards import *
+from random import randint
+from exception import *
+import os
+import time
 
 
 class Game:
@@ -40,6 +41,7 @@ class Game:
         return board
 
     def greet(self):
+        os.system('cls||clear')
         print("-------------------")
         print("  Приветсвуем вас  ")
         print("      в игре       ")
@@ -48,6 +50,9 @@ class Game:
         print(" формат ввода: x y ")
         print(" x - номер строки  ")
         print(" y - номер столбца ")
+        time.sleep(3)
+        os.system('cls||clear')
+
 
     def loop(self):
         num = 0
@@ -58,10 +63,15 @@ class Game:
                 print("-" * 20)
                 print("Ходит пользователь!")
                 repeat = self.us.move()
+                time.sleep(0.5)
+                os.system('cls||clear')
             else:
                 print("-" * 20)
                 print("Ходит компьютер!")
+                time.sleep(randint(0, 2))
                 repeat = self.ai.move()
+                time.sleep(0.5)
+                os.system('cls||clear')
             if repeat:
                 num -= 1
 
